@@ -8,7 +8,6 @@ class Controller:
         self.V = View(520, 600)
         self.V.init()
 
-
     def update(self):
         run = True
         while run:
@@ -25,7 +24,7 @@ class Controller:
                 run=False
             # make enemies move randombly
             for e in self.V.model.enemies:
-                e.move(self.V.model, pygame.time.get_ticks())
+                e.move(self.V.model, pygame.time.get_ticks( ))
 
             for event in pygame.event.get():
                 if event.type == QUIT:  # cerrar V
