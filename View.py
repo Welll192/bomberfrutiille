@@ -7,8 +7,8 @@ class View:
     def __init__(self,alto,ancho):
         '''
 
-        :param alto: alto de la ventana del juego
-        :param ancho: ancho de la ventana del juego
+        alto: alto de la ventana del juego
+        ancho: ancho de la ventana del juego
 
         '''
         self.alto=alto

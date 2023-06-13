@@ -12,22 +12,20 @@ class Controller:
         run = True
         while run:
             time = int(pygame.time.get_ticks()/1000)
-            #key_pressed = pygame.key.get_pressed()
 
-            #verify if bomb exploded
             self.V.model.hero.removeBomb(self.V.model,time)
             self.V.model.checkExplosion(time)
-            # verify if game ended
+
             if self.V.model.hero.salida:
                 run=False
             if self.V.model.hero.dead:
                 run=False
-            # make enemies move randombly
+
             for e in self.V.model.enemies:
                 e.move(self.V.model, pygame.time.get_ticks( ))
 
             for event in pygame.event.get():
-                if event.type == QUIT:  # cerrar V
+                if event.type == QUIT:
                     run = False
 
                 if event.type == KEYDOWN:

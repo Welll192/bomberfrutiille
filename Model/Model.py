@@ -217,7 +217,7 @@ class Laberinto():
 
             if point in indest:
                 return
-            #create explosion
+            # crea explosion
 
             else:
                 self.explosion.append(Explosion(self.scale, point[0], point[1], time))

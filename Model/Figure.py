@@ -27,9 +27,6 @@ class Figure():
     #que se ejecutan después deben compilarse y almacenarse en la lista de visualización.Esto significa
     #que los comandos no se ejecutan inmediatamente, sino que se almacenan en memoria para
     #su uso posterior.
-    #Esto significa que los comandos no se ejecutan inmediatamente, sino que se almacenan en memoria
-    # para su uso posterior.
-
     #Se encarga de crear la lista de visualización de la figura utilizando las funciones de OpenGL.
     def crear(self):
         self.lista = glGenLists(1)
