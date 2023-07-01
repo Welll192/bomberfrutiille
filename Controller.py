@@ -1,7 +1,12 @@
-import os
 from View import *
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'  # centrar pantalla
+'''cam = cv2.VideoCapture(0)
+
+cam.set(3, 30) # largo
+cam.set(2, 20) # alto
+cam.set(10, 500) # brillo / luminosidad'''
+
 
 class Controller:
     def __init__(self):
@@ -11,23 +16,26 @@ class Controller:
     def update(self):
         run = True
         while run:
-            time = int(pygame.time.get_ticks()/1000)
+            time = int(pygame.time.get_ticks() / 1000)
+            '''
+            check, img = cam.read()
+            cv2.imshow('Webcam', img)'''
 
-            self.V.model.hero.removeBomb(self.V.model,time)
+            self.V.model.hero.removeBomb(self.V.model, time)
             self.V.model.checkExplosion(time)
 
             if self.V.model.hero.salida:
-                run=False
+                run = False
                 self.V.gano = True
                 self.V.viewFinal()
-                
+
             if self.V.model.hero.dead:
-                run=False
+                run = False
                 self.V.perdio = True
                 self.V.viewFinal()
 
             for e in self.V.model.enemies:
-                e.move(self.V.model, pygame.time.get_ticks( ))
+                e.move(self.V.model, pygame.time.get_ticks())
 
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -55,8 +63,7 @@ class Controller:
 
             pygame.display.flip()  # actualizar pantalla
             pygame.time.wait(int(1000 / 30))  # ajusta a 30 fps
-            self.V.update()  
-        
+            self.V.update()
+
         pygame.time.wait(2000)
         pygame.quit()
-        

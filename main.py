@@ -1,4 +1,4 @@
-from Controller import *
+import Controller
 
-control= Controller()
+control = Controller.Controller()
 control.update()
