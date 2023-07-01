@@ -18,8 +18,13 @@ class Controller:
 
             if self.V.model.hero.salida:
                 run=False
+                self.V.gano = True
+                self.V.viewFinal()
+                
             if self.V.model.hero.dead:
                 run=False
+                self.V.perdio = True
+                self.V.viewFinal()
 
             for e in self.V.model.enemies:
                 e.move(self.V.model, pygame.time.get_ticks( ))
@@ -48,9 +53,10 @@ class Controller:
                     if event.key == K_a:
                         self.V.model.hero.putBomb(self.V.model, time)
 
-
-
             pygame.display.flip()  # actualizar pantalla
             pygame.time.wait(int(1000 / 30))  # ajusta a 30 fps
-            self.V.update()
+            self.V.update()  
+        
+        pygame.time.wait(2000)
         pygame.quit()
+        

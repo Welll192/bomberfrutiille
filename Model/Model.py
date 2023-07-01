@@ -1,4 +1,5 @@
 import operator
+from Model.Hero.Winner import Winner
 from Model.Muro import *
 from Model.MuroDestructible import *
 from Model.PowerUps.MultipleBomb import *
@@ -9,6 +10,7 @@ from Model.Hero.Frutilla import *
 from Model.Enemy.Robot import *
 from Model.Enemy.Melon import *
 from Model.Enemy.Pig import *
+from OpenGL.GLUT import *
 
 ops = {"+": operator.add, "-": operator.sub}
 
@@ -26,13 +28,11 @@ class Laberinto():
         self.powerups=[]
         self.explosion= []
         self.init()
-
+        
+    
     def init(self):
-
         self.hero = Frutilla(self.scale, 60, 460)
         heropath= [(60,460), (100,460), (140,460)]
-
-
         step= self.step
         halfstep= step/2
 
@@ -127,6 +127,7 @@ class Laberinto():
 
 
     def dibujar(self):
+        # if (perdio==False and gano == False):
         for i in range(self.muros_indest.__len__()):
             self.muros_indest[i].dibujar()
 
@@ -143,6 +144,7 @@ class Laberinto():
             self.enemies[i].dibujar()
 
         self.hero.dibujar()
+        
 
 
     def putBomb(self, vector, time):
@@ -265,3 +267,4 @@ class Laberinto():
         for e in self.enemies:
             if e.killHero(self.hero):
                 self.hero.isKilled()
+
