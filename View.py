@@ -63,7 +63,7 @@ class View:
         glDrawPixels(width, height, GL_RGB, GL_UNSIGNED_BYTE, image_data)
 
     def showImage(self):
-        global image_path
+        global image_path, nombre_archivo
         self.model.laberinto = []  # discretizacio del laberinto
         self.model.ocupados = []
         self.model.muros_indest = []
@@ -80,15 +80,13 @@ class View:
         # Nombre de la carpeta en la que se encuentra el archivo
         nombre_carpeta = "Image"
 
-        # Nombre del archivo que deseas abrir
-        nombre_archivo = "loser.jpg"
-
         if (self.gano):
-            image_path = os.path.join(directorio_actual, nombre_carpeta,
-                                      nombre_archivo)  # Reemplaza con la ruta de tu imagen
+            nombre_archivo = "winner.jpg"
         elif (self.perdio):
             image_path = "loser.jpg"
 
+        image_path = os.path.join(directorio_actual, nombre_carpeta,
+                                  nombre_archivo)  # Reemplaza con la ruta de tu imagen
         image = Image.open(image_path)
         image_data = image.tobytes()
         width, height = image.size
