@@ -65,15 +65,15 @@ class Controller:
                     elif fingers_vertical_pos < thumb_tip.y or (pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_UP]):
                         cv2.putText(image, 'Dedos arriba o boton arriba', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                         self.V.model.hero.move(self.V.model, 0, 1)
-                    elif fingers_vertical_pos > pinky_tip.y or (pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_DOWN]):
+                    elif fingers_vertical_pos > pinky_tip.y or (pygame.event.get(pygame.KEYDOWN) and pygqame.key.get_pressed()[pygame.K_DOWN]):
                         cv2.putText(image, 'Dedos abajo o boton abajo', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                         self.V.model.hero.move(self.V.model, 0, -1)
                     elif fingers_vertical_pos < thumb_tip.x or (pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_LEFT]):
-                        cv2.putText(image, 'Dedos a la izquierda o boton izquierda', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),2)
-                        self.V.model.hero.move(self.V.model, -1, 0)
-                    elif fingers_vertical_pos > pinky_tip.x or (pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_RIGHT]):
                         cv2.putText(image, 'Dedos a la derecha o boton derecha', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),2)
                         self.V.model.hero.move(self.V.model, 1, 0)
+                    elif fingers_vertical_pos > pinky_tip.x or (pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_RIGHT]):
+                        cv2.putText(image, 'Dedos a la izquierda o boton izquierda', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),2)
+                        self.V.model.hero.move(self.V.model, -1, 0)
 
                 pygame.display.flip()  # actualizar pantalla
                 pygame.time.wait(int(1000 / 30))  # ajusta a 30 fps
@@ -85,6 +85,7 @@ class Controller:
 
         pygame.time.wait(2000)
         pygame.quit()
+
 
 '''
     def update(self):
