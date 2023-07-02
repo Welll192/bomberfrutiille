@@ -1,6 +1,5 @@
 from OpenGL.GLU import *
 from pygame.locals import *
-
 from Model.Model import *
 from Model.PowerUps.Explosion import *
 from PIL import Image
@@ -58,7 +57,8 @@ class View:
         if self.gano or self.perdio:
             self.showImage()
 
-    def draw_image(self, image_data, width, height):
+    @staticmethod
+    def draw_image(image_data, width, height):
         glRasterPos2f(40, 0)
         glDrawPixels(width, height, GL_RGB, GL_UNSIGNED_BYTE, image_data)
 
@@ -80,13 +80,12 @@ class View:
         # Nombre de la carpeta en la que se encuentra el archivo
         nombre_carpeta = "Image"
 
-        if (self.gano):
+        if self.gano:
             nombre_archivo = "winner.jpg"
-        elif (self.perdio):
-            image_path = "loser.jpg"
+        elif self.perdio:
+            nombre_archivo = "loser.jpg"
 
-        image_path = os.path.join(directorio_actual, nombre_carpeta,
-                                  nombre_archivo)  # Reemplaza con la ruta de tu imagen
+        image_path = os.path.join(directorio_actual, nombre_carpeta, nombre_archivo)  # Reemplaza con la ruta de tu imagen
         image = Image.open(image_path)
         image_data = image.tobytes()
         width, height = image.size

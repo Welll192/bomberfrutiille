@@ -45,12 +45,6 @@ class Controller:
             for enemy in self.V.model.enemies:
                 enemy.move(self.V.model, pygame.time.get_ticks())
 
-            '''for event in pygame.event.get():
-                if event.type == QUIT:
-                    run = False
-                if event.type == KEYDOWN and event.key == K_SPACE:
-                    pass'''
-
             if results.multi_hand_landmarks:
                 for hand_landmarks in results.multi_hand_landmarks:
                     self.mp_drawing.draw_landmarks(image, hand_landmarks, self.mano.HAND_CONNECTIONS, drawing_spec,
@@ -64,36 +58,33 @@ class Controller:
 
                     fingers_vertical_pos = (thumb_tip.y + index_finger_tip.y + middle_finger_tip.y +
                                             ring_finger_tip.y + pinky_tip.y) / 5
-                    fingers_horizontal_pos = (thumb_tip.x + index_finger_tip.x + middle_finger_tip.x +
-                                              ring_finger_tip.x + pinky_tip.x) / 5
 
-                    if fingers_vertical_pos < thumb_tip.y or (pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_UP]):
+                    if pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_a]:
+                        cv2.putText(image, 'Mano cerrada', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                        self.V.model.hero.putBomb(self.V.model, time)
+                    elif fingers_vertical_pos < thumb_tip.y or (pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_UP]):
                         cv2.putText(image, 'Dedos arriba o boton arriba', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                         self.V.model.hero.move(self.V.model, 0, 1)
                     elif fingers_vertical_pos > pinky_tip.y or (pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_DOWN]):
                         cv2.putText(image, 'Dedos abajo o boton abajo', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                         self.V.model.hero.move(self.V.model, 0, -1)
-                    elif fingers_horizontal_pos < thumb_tip.x or (pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_LEFT]):
+                    elif fingers_vertical_pos < thumb_tip.x or (pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_LEFT]):
                         cv2.putText(image, 'Dedos a la izquierda o boton izquierda', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),2)
                         self.V.model.hero.move(self.V.model, -1, 0)
-                    elif fingers_horizontal_pos > pinky_tip.x or (pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_RIGHT]):
-                        cv2.putText(image, 'Dedos a la izquierda o boton derecha', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),2)
+                    elif fingers_vertical_pos > pinky_tip.x or (pygame.event.get(pygame.KEYDOWN) and pygame.key.get_pressed()[pygame.K_RIGHT]):
+                        cv2.putText(image, 'Dedos a la derecha o boton derecha', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),2)
                         self.V.model.hero.move(self.V.model, 1, 0)
-                    elif all(tip.y > pinky_tip.y for tip in [thumb_tip, index_finger_tip, middle_finger_tip, ring_finger_tip]):
-                        cv2.putText(image, 'Mano cerrada', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                        self.V.model.hero.putBomb(self.V.model, time)
 
                 pygame.display.flip()  # actualizar pantalla
                 pygame.time.wait(int(1000 / 30))  # ajusta a 30 fps
                 self.V.update()
 
-            cv2.imshow('Hand Tracking', image)
+            cv2.imshow('camara', image)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
         pygame.time.wait(2000)
         pygame.quit()
-
 
 '''
     def update(self):
